@@ -1,0 +1,54 @@
+{% extends 'partials/index.html' %}
+{% load static %}
+
+{% block content %}
+
+<main>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="pb-3 h5">All products</div>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+
+        {% for item in items %}
+
+        <div class="col">
+          <div class="card shadow-sm">
+            <img class="img-fluid" alt="Responsive image" src="{{item.images.first.image.url}}">
+            <div class="card-body">
+              <p class="card-text">
+                <h5 class="text-dark text-decoration-none" href="{{ product.get_absolute_url }}">{{ item.title }}</h5>
+              </p>
+              <p>{{ item.sub_category }}</p>
+              <h5 class="text-dark text-decoration-none" href="{{ product.get_absolute_url }}">{{ item.price }}₪</h5>
+              <div class="d-flex justify-content-between align-items-center">
+                <a href="{{ product.get_absolute_url }}" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+
+
+</main>
+{% endblock %}
+
+
+<!-- <div class="card" style="width: 18rem;">
+  {% for item in items %}
+  <img src="{{item.images.first.image.url}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h4 class="card-title">{{item.title}}</h4>
+    
+    <h6 class="card-title">{{item.description}}</h6>
+    <p class="card-text">{{item.price}}₪</p>
+    <a href="{% url 'product' item.slug %}" class="btn btn-primary">Go somewhere</a>
+  </div>
+  {% endfor %}
+</div> -->
