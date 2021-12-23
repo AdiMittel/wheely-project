@@ -1,7 +1,7 @@
 from typing import List
 from django.db.models import query
 from django.shortcuts import render, get_object_or_404
-from .models import Product, SubCategory, Category, ProductImage
+from .models import Product, Category, ProductImage
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 # Create your views here.
@@ -21,7 +21,7 @@ class AllProducts(ListView):
 
 class Homepage(ListView):
     queryset = Product.objects.all()
-    context_object_name = 'items'
+    context_object_name = 'products'
     template_name = 'homepage.html'
 
 class Footer(ListView):
@@ -36,18 +36,18 @@ class Categories(ListView):
     queryset = Category.objects.all()
     context_object_name = 'categories'
 
-class SubCategories(ListView):
-    queryset = SubCategory.objects.all()
-    context_object_name = 'subCategories'
+# class SubCategories(ListView):
+#     queryset = SubCategory.objects.all()
+#     context_object_name = 'subCategories'
     
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug, in_stock=True)
     return render(request, 'listings/product.html', {'product': product})
 
-def category_list(request, category_slug):
-    category = get_object_or_404(Category, slug=category_slug)
-    product = Product.objects.filter(category=category)
-    return render(request, 'shop/listings/by_categoty', {'category':category, 'products':product})
+# def category_list(request, category_slug):
+#     category = get_object_or_404(Category, slug=category_slug)
+#     product = Product.objects.filter(category=category)
+#     return render(request, 'shop/listings/by_categoty', {'category':category, 'products':product})
 
-# class Cart(ListView):
-#     pass
+def contact(request):
+    return render(request, 'cart/contact.html')

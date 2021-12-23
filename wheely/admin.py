@@ -13,13 +13,6 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']
     prepopulated_fields = {'slug': ('name',)}
 
-@admin.register(SubCategory)
-class SubCategoryAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug']
-    prepopulated_fields = {'slug': ('name',)}
-    list_filter = ['name','category']
-
-
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['title', 'brand', 'price',
@@ -28,6 +21,15 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ['price', 'in_stock']
     prepopulated_fields = {'slug': ('title',)}
     inlines = [ProductImageInline]
+
+
+# @admin.register(SubCategory)
+# class SubCategoryAdmin(admin.ModelAdmin):
+#     list_display = ['name', 'slug']
+#     prepopulated_fields = {'slug': ('name',)}
+#     list_filter = ['name','category']
+
+
 
 
 @admin.register(Size)

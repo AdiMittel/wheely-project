@@ -18,19 +18,19 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-class SubCategory(models.Model):
-    name = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255, unique=True)
-    category =  models.ForeignKey(Category, on_delete=models.CASCADE,null=True, blank=True)
+# class SubCategory(models.Model):
+#     name = models.CharField(max_length=255)
+#     slug = models.SlugField(max_length=255, unique=True)
+#     category =  models.ForeignKey(Category, on_delete=models.CASCADE,null=True, blank=True)
 
-    class Meta:
-        verbose_name_plural = 'Sub-Categories'
+#     class Meta:
+#         verbose_name_plural = 'Sub-Categories'
         
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
 class Product(models.Model):
-    sub_category = models.ForeignKey(SubCategory,related_name='product', on_delete=models.CASCADE, null = True, blank = True)
+    category = models.ForeignKey(Category,related_name='product', on_delete=models.CASCADE,null = True)
     title = models.CharField(max_length=255)
     brand = models.CharField(max_length=255)
     description = models.TextField(blank=True)

@@ -15,15 +15,15 @@
 
         <div class="col">
           <div class="card shadow-sm">
-            <img class="img-fluid" alt="Responsive image" src="{{item.images.first.image.url}}">
+            <img class="img-fluid" alt="Responsive image" src="{% url 'product' item.slug %}">
             <div class="card-body">
               <p class="card-text">
-                <h5 class="text-dark text-decoration-none" href="{{ product.get_absolute_url }}">{{ item.title }}</h5>
+                <h5 class="text-dark text-decoration-none" href="{% url 'product' item.slug %}">{{ item.title }}</h5>
               </p>
-              <p>{{ item.sub_category }}</p>
-              <h5 class="text-dark text-decoration-none" href="{{ product.get_absolute_url }}">{{ item.price }}₪</h5>
+              <p>{{ item.category }}</p>
+              <h5 class="text-dark text-decoration-none" href="{% url 'product' item.slug %}">{{ item.price }}₪</h5>
               <div class="d-flex justify-content-between align-items-center">
-                <a href="{{ product.get_absolute_url }}" class="btn btn-primary">Go somewhere</a>
+                <a href="{% url 'product' item.slug %}" class="btn btn-primary">Go somewhere</a>
               </div>
             </div>
           </div>
