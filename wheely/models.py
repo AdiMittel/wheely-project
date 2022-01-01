@@ -11,23 +11,9 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = 'Categories'
 
-    def get_absolute_url(self):
-        return reverse('store:product_detail', args=[self.slug])
-
-
     def __str__(self):
         return self.name
 
-# class SubCategory(models.Model):
-#     name = models.CharField(max_length=255)
-#     slug = models.SlugField(max_length=255, unique=True)
-#     category =  models.ForeignKey(Category, on_delete=models.CASCADE,null=True, blank=True)
-
-#     class Meta:
-#         verbose_name_plural = 'Sub-Categories'
-        
-#     def __str__(self):
-#         return self.name
 
 class Product(models.Model):
     category = models.ForeignKey(Category,related_name='product', on_delete=models.CASCADE,null = True)
@@ -77,13 +63,20 @@ class Color(models.Model):
     def __str__(self):
         return self.name
 
-# class Skaters(models.Model):
-#     name = models.CharField(max_length=255)
-#     age = models.IntegerField()
-#     city = models.CharField(max_length=255)
-#     height = models.FloatField(max_digits=1, decimal_places=2)
-#     weight = models.IntegerField()
-#     stance = models.CharField(max_length=255)
-#     style = models.CharField(max_length=255)
-#     time_skating = models.IntegerField()
-#     fav_park = models.CharField(max_length=255)
+class Skaters(models.Model):
+    image = models.ImageField(upload_to='images/')
+    name = models.CharField(max_length=255)
+    age = models.IntegerField()
+    city = models.CharField(max_length=255)
+    height = models.DecimalField(max_digits=5, decimal_places=2)
+    weight = models.IntegerField()
+    stance = models.CharField(max_length=255)
+    time_skating = models.IntegerField()
+    # fav_style = models.CharField(max_length=255)
+    # fav_park = models.CharField(max_length=255)
+    # do_for_living = models.CharField(max_length=255)
+    # deck = models.CharField(max_length=255)
+    # trucks = models.CharField(max_length=255)
+    # wheels = models.CharField(max_length=255)
+    # bearings = models.CharField(max_length=255)
+    # instegram = models.

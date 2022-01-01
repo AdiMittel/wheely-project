@@ -1,0 +1,104 @@
+{% extends '../partials/index.html' %}
+{% load static %}
+
+
+{% block content %}
+<!-- <main class="pt-5">
+  <div class="container">
+    <h1 class="h5">Shopping cart</h1>
+    {% for item in cart %}
+    {% with product=item.product %}
+    <div data-index="{{product.id}}" class="row mb-4 border product-item">
+      <div class="col-md-3 col-lg-2 order-md-first bg-light">
+        <img class="img-fluid mx-auto d-block" width="120px" alt="Responsive image" src="{{ product.image.url }}">
+      </div>
+      <div class="col-md-9 col-lg-10 ps-md-3 ps-lg-10">
+        <a href="{% url 'product' %}" class="text-decoration-none text-reset">
+          <h1 class="h5 pt-2">{{ product.title }}</h1>
+        </a>
+        <div class="border">
+          <div class="col border-bottom">
+            <div class="row p-3">
+              <div class="col-6 text-end"><span class="h6 fw-bold">{{ product.price }}₪</span></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="row p-3">
+              <div class="col-12">
+                <label for="select">Qty</label>
+                <select id="select{{product.id}}">
+                  <option selected>
+                    {{item.qty}}
+                  </option>
+                  <option value="">1</option>
+                  <option value="">2</option>
+                  <option value="">3</option>
+                  <option value="">4</option>
+                </select>
+                <!-- <button action = "{% url 'cart_delete' %}" type="button" id="update-button" data-index="{{product.id}}"
+                  class="btn btn-outline-secondary btn-sm update-button">
+                  Update
+                </button> -->
+<!-- <button action = "#" type="button" id="delete-button" data-index="{{product.id}}"
+                    class="btn btn-outline-secondary btn-sm delete-button">
+                    Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endwith %}
+    {% endfor %}
+    <div class="col-12 text-end">
+      <div class="h6 fw-bold">Sub Total: <div id="subtotal" class="d-inline-flex">{{cart.get_total_price}}₪</div></div>
+    </div>
+  </div>
+</main> --> 
+
+<div>
+  <table class="cart">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Product</th>
+        <th>Qty</th>
+        <th>Remove</th>
+        <th>Total Price</th>
+      </tr>
+    <tbody>
+      {% for item in cart %}
+      {% with product=item.product %}
+      <tr>
+        <td>
+          <a href="{% url 'product' product.id %}">
+            <img src="{{product.images.first.image.url}}">
+          </a>
+        </td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.qty }}</td>
+        <td>
+          <form action="{% url 'cart_delete' product.id %}" method="post">
+            <input type="submit" value="Remove">
+            {% csrf_token %}
+          </form>
+        </td>
+        <td class="num">{{ item.total_price }}₪</td>></td>
+
+      </tr>
+      {% endwith %}
+      {% endfor %}
+      <tr class="total">
+        <td>Total</td>
+        <td colspan="4"></td>
+        <td class="num">{{ cart.get_total_price}}</td>
+      </tr>
+    </tbody>
+    </thead>
+  </table>
+  <P class="text-right">
+    <a href="{% url 'shop' %}" class="buttonlight">Continue Shopping</a>
+  </P>
+</div>
+{% endblock %}

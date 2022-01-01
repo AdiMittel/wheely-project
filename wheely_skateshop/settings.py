@@ -72,6 +72,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'wheely.context_processors.category',
+                'wheely.context_processors.item',
+                'wheely.context_processors.skater',
+                'cart.context_processors.cart',
+                
             ],
         },
     },
@@ -124,8 +128,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+CART_SESSION_ID = 'cart'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -149,6 +159,6 @@ AWS_S3_SIGNATURE_VERSION = 's3v4'
 MEDIA_URL = AWS_URL + '/media/'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-STATIC_URL = AWS_URL + '/static/'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# STATIC_URL = AWS_URL + '/static/'
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 

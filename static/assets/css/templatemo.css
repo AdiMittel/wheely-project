@@ -174,7 +174,7 @@ body, ul, li, p, a, label, input, div {
 }
 
 #tempaltemo_footer{
-  height: 50%;
+  height:40vh;
 }
 
 @media (min-width: 576px) {
