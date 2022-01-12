@@ -71,10 +71,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart',
                 'wheely.context_processors.category',
                 'wheely.context_processors.item',
                 'wheely.context_processors.skater',
-                'cart.context_processors.cart',
                 
             ],
         },

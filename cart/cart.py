@@ -4,6 +4,7 @@ from decimal import Decimal
 from wheely_skateshop import settings
 # from django.conf import settings
 
+
 class Cart(object):
 
     def __init__(self, request):
@@ -13,7 +14,7 @@ class Cart(object):
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
 
-    def add(self, product, qty=1, override_qty = False):
+    def add(self, product, qty=1, override_qty=False):
 
         product_id = str(product.id)
 
@@ -25,17 +26,15 @@ class Cart(object):
             self.cart[product_id]['qty'] += qty
         self.save()
 
-    def save(self):
-        self.session.modified = True
+    def delete(self, product_id):
 
-    def delete(self, product):
-
-        product_id = str(product)
+        product_id = str(product_id)
 
         if product_id in self.cart:
+            self.cart[product_id]['qty'] -= 1
+        if self.cart[product_id]['qty'] == 0:
             del self.cart[product_id]
-            print(product_id)
-            self.save()
+        self.save()
 
     def __iter__(self):
 
@@ -68,5 +67,6 @@ class Cart(object):
     def clear(self):
         del self.session[settings.CART_SESSION_ID]
 
-
-
+    def save(self):
+        self.session[settings.CART_SESSION_ID] = self.cart
+        self.session.modified = True
